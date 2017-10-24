@@ -7,6 +7,8 @@
 // dynamically.
 __webpack_public_path__ = document.querySelector('body').getAttribute('data-base-url') + 'nbextensions/jupyter_vizard/';
 
+var barchart = require('./barchart.js');
+var example = require('./example.js');
 // Export widget models and views, and the npm package version number.
-module.exports = require('./barchart.js');
+module.exports = Object.assign({}, example, barchart)
 module.exports['version'] = require('../package.json').version;

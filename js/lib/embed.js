@@ -4,6 +4,9 @@
 // dynamic baseURL for the static assets and may load some css that would
 // already be loaded by the notebook otherwise.
 
+var barchart = require('./barchart.js');
+var example = require('./example.js');
 // Export widget models and views, and the npm package version number.
-module.exports = require('./barchart.js');
+module.exports = Object.assign({}, example, barchart)
+
 module.exports['version'] = require('../package.json').version;

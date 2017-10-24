@@ -4,7 +4,15 @@ var version = require('./package.json').version;
 // Custom webpack rules are generally the same for all webpack bundles, hence
 // stored in a separate local variable.
 var rules = [
-    { test: /\.css$/, use: ['style-loader', 'css-loader']}
+    { test: /\.css$/, use: ['style-loader', 'css-loader']},
+    // {
+    //   test: /\.js$/,
+    //   loader: 'babel-loader',
+    //   query: {
+    //     presets: ['es2015']
+    //   }
+    // }
+
 ]
 
 
@@ -22,6 +30,9 @@ module.exports = [
             filename: 'extension.js',
             path: path.resolve(__dirname, '..', 'jupyter_vizard', 'static'),
             libraryTarget: 'amd'
+        },
+        module: {
+          rules: rules,
         }
     },
     {// Bundle for the notebook containing the custom widget views and models
@@ -38,7 +49,7 @@ module.exports = [
         },
         devtool: 'source-map',
         module: {
-            rules: rules
+            rules: rules,
         },
         externals: ['@jupyter-widgets/base']
     },
@@ -65,7 +76,7 @@ module.exports = [
         },
         devtool: 'source-map',
         module: {
-            rules: rules
+            rules: rules,
         },
         externals: ['@jupyter-widgets/base']
     }

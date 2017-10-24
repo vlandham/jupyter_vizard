@@ -41,10 +41,10 @@ var BarChartView = widgets.DOMWidgetView.extend({
       .data(data).enter()
       .append('rect')
       .classed('bar', true)
-      .attr('width', function(d) { return that.xScale(d[xKey])})
-      .attr('y', function(d,i) { return that.yScale(i)})
-      .attr('height', this.yScale.bandwidth())
       .attr('x', 0)
+      .attr('y', function(d,i) { return that.yScale(i); })
+      .attr('width', function(d) { return that.xScale(d[xKey]); })
+      .attr('height', this.yScale.bandwidth())
   },
 
   updateScales: function() {

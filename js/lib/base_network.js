@@ -140,7 +140,7 @@ module.exports = function network() {
 
 
     svg.call(d3.zoom()
-      .scaleExtent([1 / 2, 8])
+      .scaleExtent([1 / 8, 8])
       .on('zoom', zoomed));
 
     function zoomed() {

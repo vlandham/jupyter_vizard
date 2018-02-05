@@ -80,9 +80,9 @@ class NPM(Command):
         npmName = 'npm';
         if platform.system() == 'Windows':
             npmName = 'npm.cmd';
-            
+
         return npmName;
-    
+
     def has_npm(self):
         npmName = self.get_npm_name();
         try:
@@ -149,9 +149,9 @@ setup_args = {
         'jsdeps': NPM,
     },
 
-    'author': 'jim v',
+    'author': 'Jim Vallandingham',
     'author_email': 'v@v.com',
-    'url': 'https://github.com//jupyter_vizard',
+    'url': 'https://github.com/jupyter_vizard',
     'keywords': [
         'ipython',
         'jupyter',

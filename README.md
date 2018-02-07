@@ -74,13 +74,13 @@ which npm
 
 If you are missing npm, you can install (on a Mac) via homebrew:
 
-```
+```bash
 brew install node npm
 ```
 
 Then clone and install this package:
 
-```
+```bash
 git clone https://github.com//jupyter_vizard.git
 cd jupyter_vizard
 pip install -e .
@@ -92,7 +92,7 @@ jupyter nbextension enable --py --sys-prefix jupyter_vizard
 
 After a code change, it appears you can just run the install command again:
 
-```
+```bash
 pip install -e .
 ```
 
@@ -104,7 +104,7 @@ If it does not restart automatically, restart the Kernel using **Kernel ->  Rest
 
 If this does not provide a clean install, you can remove and reinstall this widget using the following commands:
 
-```
+```bash
 # uninstall from jupyter
 jupyter nbextension uninstall --py --sys-prefix jupyter_vizard
 
@@ -121,7 +121,7 @@ jupyter nbextension enable --py --sys-prefix jupyter_vizard
 
 You can also check the compilation of just the Javascript source by running:
 
-```
+```bash
 # go into the js dir
 cd ./js
 
@@ -132,6 +132,8 @@ npm run prepublish
 ## Architecture
 
 Here, we summarize how the codebase is put together.
+
+For another take, checkout the [ipywidgets hello world tutorial](http://ipywidgets.readthedocs.io/en/stable/examples/Widget%20Custom.html)
 
 Jupyter Widgets can be built using the [ipywidgets](https://ipywidgets.readthedocs.io/en/latest/#) python package.
 

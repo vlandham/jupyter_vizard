@@ -29,10 +29,12 @@ module.exports = function network() {
 
   var minEdgeCount = 0;
   var sticyNode = null;
+  var props = {};
 
 
   // colors for nodes
   var colorScheme = d3.scaleOrdinal(d3.schemeCategory20);
+  var colorFor = function(d) { return nodeColor; }
 
   // tooltip for mouseover functionality
   // implemented in tooltip.js
@@ -102,14 +104,24 @@ module.exports = function network() {
   //  nodes so stop for now.
   simulation.stop();
 
+
+  function computeProps(rawData, config) {
+    if (config.colorKey) {
+      colorFor = function(d) { return colorScheme(d[config.colorKey])};
+    }
+
+  }
+
   /*
   * Entry point to create network.
   * This function is returned by the
   * enclosing function and will be what is
   * executed when we have data to visualize.
   */
-  var chart = function (selector, rawData) {
+  var chart = function (selector, rawData, config) {
+    props = computeProps(rawData, config)
     allData = setupData(rawData);
+
 
     parentNode = selector;
 
@@ -332,7 +344,7 @@ module.exports = function network() {
 
     nodes = nodes.merge(nodesE)
       .attr('r', function (d) { return d.radius; })
-      .style('fill', nodeColor)
+      .style('fill', colorFor)
       .style('stroke', 'white')
       .style('cursor', 'pointer')
       .style('stroke-width', 1.0);
@@ -451,7 +463,7 @@ module.exports = function network() {
         d.searched = true;
       } else {
         d.searched = false;
-        element.style('fill', nodeColor)
+        element.style('fill', colorFor)
           .style('stroke-width', 1.0);
       }
     });
@@ -543,7 +555,7 @@ module.exports = function network() {
           } else if (sticyNode && n.id === sticyNode.id) {
             return highlightColor;
           }
-          return nodeColor;
+          return colorFor(n);
         })
         .style('stroke', function (n) {
           if (d.id === n.id || n.searched || neighboring(d, n)) {
@@ -630,7 +642,7 @@ module.exports = function network() {
         if (sticyNode && n.id === sticyNode.id) {
           return highlightColor;
         }
-        return nodeColor;
+        return colorFor(n);
       })
       .style('stroke', 'white')
       .style('stroke-width', 1.0);

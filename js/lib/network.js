@@ -88,7 +88,7 @@ var NetworkModel = widgets.DOMWidgetModel.extend({
 var NetworkView = widgets.DOMWidgetView.extend({
   initialize: function() {
     NetworkView.__super__.initialize.apply(this, arguments);
-    this.model.on('change:data', this.render, this);
+    this.model.on('change', this.render, this);
   },
 
   render: function() {
@@ -96,21 +96,29 @@ var NetworkView = widgets.DOMWidgetView.extend({
     if (!data) {
       data = {}
     }
+
     var edges = this.model.get("edges");
     if (edges && edges.length > 0) {
-
       data.edges = edges;
-
     }
+
+    var nodes = this.model.get("nodes");
+    if (nodes && nodes.length > 0) {
+      data.nodes = nodes;
+    }
+
     var myNetwork = network();
     var nData = setupNodesEdges(data);
 
+    var config = this.model.get("config");
+
     console.log('network data', nData)
+    console.log('config', config)
 
 
     // this.value_changed();
     var cRoot = d3.select(this.el);
-    myNetwork(this.el, nData);
+    myNetwork(this.el, nData, config);
   },
 
   updateScales: function() {

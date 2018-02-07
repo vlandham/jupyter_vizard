@@ -18,6 +18,8 @@ class Network(widgets.DOMWidget):
 
     data = Dict({'nodes': [], 'edges': []}).tag(sync=True)
     edges = List([]).tag(sync=True)
+    nodes = List([]).tag(sync=True)
+    config = Dict({'colorKey': None, 'showLabels': False, 'rKey': None}).tag(sync=True)
     r_key = Unicode('r').tag(sync=True)
     width = Int(400).tag(sync=True)
     height = Int(400).tag(sync=True)

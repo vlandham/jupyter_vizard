@@ -7,7 +7,8 @@
 var barchart = require('./barchart.js');
 var example = require('./example.js');
 var network = require('./network.js');
+var mnetwork = require('./mnetwork.js');
 // Export widget models and views, and the npm package version number.
-module.exports = Object.assign({}, example, barchart, network)
+module.exports = Object.assign({}, example, barchart, network, mnetwork)
 
 module.exports['version'] = require('../package.json').version;

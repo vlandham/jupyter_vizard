@@ -118,7 +118,7 @@ var MNetworkView = widgets.DOMWidgetView.extend({
 
     // this.value_changed();
     var cRoot = d3.select(this.el);
-    myNetwork(this.el, nData, config);
+    myNetwork(this.el, this, nData, config);
   },
 
   updateScales: function() {
@@ -135,6 +135,14 @@ var MNetworkView = widgets.DOMWidgetView.extend({
   value_changed: function() {
     // this.el.textContent = this.model.get('value');
     // var data = this.model.get("_model_data");
+  },
+
+
+  updateData: function(newData) {
+    console.log('updating data', newData)
+    this.send({event: 'data', data: newData});
+    this.model.set("data", newData);
+    this.touch();
   }
 });
 

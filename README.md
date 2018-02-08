@@ -81,7 +81,7 @@ brew install node npm
 Then clone and install this package:
 
 ```bash
-git clone https://github.com//jupyter_vizard.git
+git clone git@github.com:vlandham/jupyter_vizard.git
 cd jupyter_vizard
 pip install -e .
 jupyter nbextension install --py --symlink --sys-prefix jupyter_vizard

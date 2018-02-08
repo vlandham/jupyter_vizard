@@ -1,8 +1,6 @@
 var d3 = require("d3");
 
-// import createLayout from './layout';
-// import createLayout from './daLayout';
-
+// var createLayout = require('./mnetwork_layout_dagraph');
 var createLayout = require('./mnetwork_layout');
 
 module.exports = function createChart() {
@@ -14,11 +12,13 @@ module.exports = function createChart() {
   let data = [];
   let edges = null;
   let nodes = null;
+  let view = null;
 
-  const chart = function wrapper(selection, rawData, config) {
+  const chart = function wrapper(selection, myView, rawData, config) {
     console.log(rawData);
 
     data = rawData;
+    view = myView;
 
     const svg = d3.select(selection).append('div').append('svg')
       .attr('width', width + margin.left + margin.right)
@@ -29,6 +29,14 @@ module.exports = function createChart() {
 
     g.append('g').classed('edges', true);
     g.append('g').classed('nodes', true);
+
+    svg.call(d3.zoom()
+    .scaleExtent([1 / 8, 8])
+    .on('zoom', zoomed));
+
+    function zoomed() {
+      g.attr('transform', d3.event.transform);
+    }
 
     setup();
     update();
@@ -45,6 +53,7 @@ module.exports = function createChart() {
 
   function ended() {
     update();
+    view.updateData(data);
   }
 
   function update() {
@@ -67,11 +76,12 @@ module.exports = function createChart() {
   }
 
   function dragged(d) {
-    console.log('dragged')
     d.fx = d3.event.x;
     d.fy = d3.event.y;
     d.x = d3.event.x;
     d.y = d3.event.y;
+
+    view.updateData(data);
 
     updatePos();
   }
@@ -126,10 +136,10 @@ module.exports = function createChart() {
       .attr('cy', d => d.y);
 
     edges
-      .attr('x1', d => d.source.x)
-      .attr('y1', d => d.source.y)
-      .attr('x2', d => d.target.x)
-      .attr('y2', d => d.target.y);
+      .attr('x1', d => d.source ? d.source.x : d.source)
+      .attr('y1', d => d.source ? d.source.y : d.source)
+      .attr('x2', d => d.source ? d.target.x : d.source)
+      .attr('y2', d => d.source ? d.target.y : d.source);
   }
 
   return chart;

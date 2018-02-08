@@ -33,6 +33,7 @@
   "dependencies": {
     "@jupyter-widgets/base": "^1.0.0",
     "d3": "^4.11.0",
+    "dagre": "^0.8.2",
     "lodash": "^4.17.4"
   }
 }
